@@ -1,0 +1,30 @@
+h1 {
+	color: #008080;
+}
+h2 {
+	color:#FFD700;
+}
+.board {
+	height: 80%;
+	width: 50%;
+	display: inline-block;
+}
+.card {
+	height:200px;
+	width:150px;
+	border: black solid 1px;
+	border-radius: 10px;
+	background: yellow;
+}
+article {
+	text-align:center;
+	font-family:Arial, sans-serif;
+}
+span {
+	font-family:Tahoma, sans-serif;
+	font-size:18px;
+	color:#FF0000;
+}
+header {
+	text-align:center;
+}
