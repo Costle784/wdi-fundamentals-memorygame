@@ -28,3 +28,13 @@ span {
 header {
 	text-align:center;
 }
+
+img {
+	height:200px;
+	width:150px;
+	border-radius:10px;
+}
+.main {
+	margin: 0 30px;
+	background-color:gray;
+}
