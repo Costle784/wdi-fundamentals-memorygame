@@ -1,49 +1,64 @@
-console.log("JS file is connected to HTML! Woo!")
+console.log("JS file is connected to HTML! Woo!");
 
 
-document.querySelector('.board').setAttribute('id','game-board'); //set id (game-board) for wrapper (div) to hold new cardElements. 
-var gameBoard = document.getElementById('game-board');			//set this to variable gameBoard.
+setTimeout(showPrompt,1000);
 
-var cardsInPlay = []; 
+var cardInput;
+
+function showPrompt(){
+	cardInput = window.prompt("Welcome to Forget Me Not!\nPlease enter a number 1-5\n1 - simple\n2 - easy\n3 - just right\n4 - hard\n5 - INSANE","3");
+	makeCards(cardInput);
+}
+
 var cards = [];
+var gameBoard = document.getElementById('game-board');
 
-
-function createCardArray(cardNum){		//loop to create new cardElents (divs), append them as children to gameBoard.
-						//assign each cardElement a class of 'card' as a selector for css. 
-										//push cardElements into an array, var cards. 		
-	for(var i = 0; i < cardNum; i++){
+function makeCards(num){		
+	for(var i = 0; i < cardInput; i++){
 		var cardElement = document.createElement('div');
-		cardElement.className='card';
+		cardElement.className ='card'; //??
 		gameBoard.appendChild(cardElement);
 		cards.push(cardElement); 
 	}
+	makeValueArray(cardInput);
+	createStartButton();
 }
-createCardArray(8);
 
-var valueArray = ["queen","queen","king","king","queen","queen","king","king"]
+var valueArray = [];
 
-function shuffle(array) {
-  var m = array.length, t, i;
+function makeValueArray(num){
+	for(var i = 0; i < num; i++){
+		if(i % 2 === 0){
+			valueArray.push("queen");
+		}
+		else{
+			valueArray.push("king")
+		}
+	}
+console.log(valueArray)
+shuffle(valueArray);
+} 
+
+function shuffle(arr) {
+ 	var m = arr.length, t, i;
   
   	while(m){
 	    i = Math.floor(Math.random() * m--);
-	    t = array[m];
-	    array[m] = array[i];
-	    array[i] = t;
+	    t = arr[m];
+	    arr[m] = arr[i];
+	    arr[i] = t;
 	}
-  	console.log(valueArray);
+setAttributes(valueArray);
 }
 
-shuffle(valueArray);
-
-function setAttributes(array){
-	
-	for(var i = 0; i < cards.length; i++){	
+function setAttributes(arr) {
+	for(var i = 0; i < cards.length; i++) {	
 		cards[i].addEventListener('click', flipOver)  // add 'click' event listener to each card and have it trigger flipOver function
 		cards[i].setAttribute('data-card', valueArray[i]); // add 'data-card' attribute and a random 'king' or 'queen' value to 'data-card'
 	}	
 }
-setAttributes(valueArray);
+
+var cardsInPlay = []; 
 
 function flipOver(){
 	if(this.getAttribute('data-card') === "queen"){
@@ -63,20 +78,55 @@ function flipOver(){
 }
 
 
- function isMatch() {
- 	if(cardsInPlay[0] === cardsInPlay[1]){   
-	var popup = document.querySelector('.popuptext');
-	    popup.classList.toggle('show');
- 	} 
- }
+// function quickDisplay(arr){
+//  	for(i = 0; i < arr.length; i++){
+//  		if(arr[i] === "queen"){
+//  			setTimeout(showCard, 3000);
+// 		}
+//  	}
+// }
+
+function createStartButton(){
+	var startButton = document.createElement('button');
+	var startContainer = document.getElementById('startContainer');
+	startContainer.appendChild(startButton);
+	startButton.innerHTML = 'Start';
+	startButton.classname = "startbutt";
+	startButton.addEventListener('click', showCards)
+}
 
 
-// var popup = document.getElementById('myPopup');
-//     popup.classList.toggle('show');
-
-
-
+function showCards(arr){
+	for(i = 0; i < cards.length; i++){
 		
+		if(cards[i].getAttribute('data-card') === "queen"){
+			cards[i].innerHTML = '<img src="images/Queen.jpg">';
+		}
+		else{
+			cards[i].innerHTML = '<img src="images/King.jpg">';
+		}
+	}
+	window.setTimeout(flipBackOver, 2000);
+}	
+
+function flipBackOver(){
+	var playingCards = document.getElementsByClassName('card');
+	
+	for(i = 0; i < playingCards.length; i++){
+		playingCards[i].innerHTML = "";
+
+	}
+}
+
+function isMatch(){
+	if(cardsInPlay[0] === cardsInPlay[1]){
+		var popup = document.getElementById('myPopup');
+		popup.classList.toggle('show');
+	}
+}
+
+
+
 
 
 

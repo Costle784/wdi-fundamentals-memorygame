@@ -1,5 +1,5 @@
 h1 {
-	color:#e6af4b;
+	color:black;
 	font-size:50px;
 	margin: 12px;
 	font-family: 'Cormorant', serif;
@@ -12,7 +12,7 @@ h2 {
 	font-family: 'Cormorant', serif;
 }
 .board {
-	width: 730px;
+	width: 816px;
 	background-color:white;
 	margin: 0 auto;
 }
@@ -26,15 +26,15 @@ h2 {
 
 }
 .card {
-	height:200px;
-	width:150px;
-	border: black solid 1px;
+	height:150px;
+	width:100px;
+	border: black solid 3px;
 	border-radius: 10px;
-	background: #9fa8a3;
+	background: radial-gradient(#9fa8a3, black, #9d2525);
 	display: inline-block;
 	float:left;
 	margin:15px;
-
+	
 }
 article {
 	text-align:center;
@@ -50,8 +50,8 @@ header {
 }
 
 img {
-	height:200px;
-	width:150px;
+	height:150px;
+	width:100px;
 	border-radius:10px;
 }
 .main {
@@ -66,38 +66,50 @@ body {
 }
 p {
 	margin:12px;
+	margin-bottom:0px;
 	font-family: 'Cormorant', serif;
 }
 h3 {
 	font-family: 'Cormorant', serif;
 }
+
 .popup .popuptext {
-	visibility:hidden;
-	border-radius: 7px;
-    background:blue;
-    margin:30px auto 0;
-    padding:6px;  
+	background-color:pink;
+	top:265px;
 	position:absolute;
-    width:400px;
-    top: 50%;
-    left: 50%;
-    margin-left: -200px; 
-    margin-top: -40px; 
-    text-align:center;
+	z-index: 1;
+	margin:0 auto;
+	left:0;
+	right:0;
+	width:25%;
+	border-radius:7px;
+	border-style:dashed;
+	border-width: 5px;
+	visibility: hidden;
+	text-align:center;
+	font-size:50px;
+	font-family: 'Shrikhand', cursive;
+	padding:10px;
 }
-	
-    
+.start {
+	text-align:center;
+	margin:15px;
+	font-size:50px;
+}    
+button {
+	color:red;
+	font-family:"Cormorant", serif;
+	font-size:30px;
+	border-radius:7px;
+	font-weight:800;
+}
   
-
-
-/* Toggle this class when clicking on the popup container (hide and show the popup) */
 .popup .show {
     visibility: visible;
     -webkit-animation: fadeIn 1s;
     animation: fadeIn 1s
 }
 
-/* Add animation (fade in the popup) */
 @-webkit-keyframes fadeIn {
     from {opacity: 0;} 
     to {opacity: 1;}
