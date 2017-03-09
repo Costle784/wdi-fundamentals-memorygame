@@ -1,12 +1,34 @@
 console.log("JS file is connected to HTML! Woo!");
 
+var cardInput; 
 
-setTimeout(showPrompt,1000);
+setTimeout(getValue,400);
 
-var cardInput;
+function showPrompt() {
+	return window.prompt("Welcome to Forget Me Not!\nPlease enter a number 1-5\n1 - simple\n2 - easy\n3 - just right\n4 - hard\n5 - INSANE","3")
+}	
 
-function showPrompt(){
-	cardInput = window.prompt("Welcome to Forget Me Not!\nPlease enter a number 1-5\n1 - simple\n2 - easy\n3 - just right\n4 - hard\n5 - INSANE","3");
+function getValue() {
+	switch (Number(showPrompt())) {
+		case 5:
+			cardInput = 24;
+			break;
+		case 4:
+			cardInput = 18;
+			break;	
+		case 3:
+			cardInput = 12;
+			break;	
+		case 2:
+			cardInput = 8;
+			break;
+		case 1:
+			cardInput = 4;
+			break;
+		default:	
+			cardInput = 12;
+			break;	
+	}		
 	makeCards(cardInput);
 }
 
@@ -16,7 +38,7 @@ var gameBoard = document.getElementById('game-board');
 function makeCards(num){		
 	for(var i = 0; i < cardInput; i++){
 		var cardElement = document.createElement('div');
-		cardElement.className ='card'; //??
+		cardElement.className ='card'; 
 		gameBoard.appendChild(cardElement);
 		cards.push(cardElement); 
 	}
@@ -26,16 +48,16 @@ function makeCards(num){
 
 var valueArray = [];
 
-function makeValueArray(num){
-	for(var i = 0; i < num; i++){
-		if(i % 2 === 0){
+function makeValueArray(num) {
+	for (var i = 0; i < num; i++) {
+		if (i % 2) {
 			valueArray.push("queen");
 		}
-		else{
+		else {
 			valueArray.push("king")
 		}
 	}
-console.log(valueArray)
+
 shuffle(valueArray);
 } 
 
