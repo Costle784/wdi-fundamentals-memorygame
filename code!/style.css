@@ -1,20 +1,21 @@
 h1 {
-	color:black;
+	color:#e6a71b;
 	font-size:50px;
 	margin: 12px;
-	font-family: 'Cormorant', serif;
+	font-family: 'Cinzel Decorative', cursive;
 	font-weight:800;
 }
 h2 {
-	color: black;
+	color:#e6a71b;
 	font-size:30px;
 	margin:20px 0px 5px 0px;
-	font-family: 'Cormorant', serif;
+	font-family: 'Cinzel Decorative', cursive;
 }
 .board {
-	width: 816px;
+	width: 810px;
 	background-color:white;
 	margin: 0 auto;
+	text-align:center;
 }
 .clearfix:after {
 	visibility: hidden;
@@ -30,11 +31,10 @@ h2 {
 	width:100px;
 	border: black solid 3px;
 	border-radius: 10px;
-	background: radial-gradient(#9fa8a3, black, #9d2525);
+	background: radial-gradient(#e6a71b, black, #9d2525);
 	display: inline-block;
-	float:left;
-	margin:15px;
-	
+	float: left;
+	margin: 15px;
 }
 article {
 	text-align:center;
@@ -67,15 +67,15 @@ body {
 p {
 	margin:12px;
 	margin-bottom:0px;
-	font-family: 'Cormorant', serif;
+	font-family: 'Cinzel Decorative', cursive;
 }
 h3 {
-	font-family: 'Cormorant', serif;
+	font-family: 'Cinzel Decorative', cursive;
 }
 
 .popup .popuptext {
-	background-color:pink;
-	top:265px;
+	background-color: rgba(89, 290, 0, 0.65);
+	top:450px;
 	position:absolute;
 	z-index: 1;
 	margin:0 auto;
@@ -83,13 +83,13 @@ h3 {
 	right:0;
 	width:25%;
 	border-radius:7px;
-	border-style:dashed;
-	border-width: 5px;
+	border-width: 3px;
 	visibility: hidden;
 	text-align:center;
 	font-size:50px;
-	font-family: 'Shrikhand', cursive;
+	font-family: 'Cinzel Decorative', cursive;
 	padding:10px;
+	font-weight:800;
 }
 .start {
 	text-align:center;
@@ -98,7 +98,7 @@ h3 {
 }    
 button {
 	color:red;
-	font-family:"Cormorant", serif;
+	font-family: 'Cinzel Decorative', cursive;
 	font-size:30px;
 	border-radius:7px;
 	font-weight:800;
@@ -106,16 +106,16 @@ button {
   
 .popup .show {
     visibility: visible;
-    -webkit-animation: fadeIn 1s;
-    animation: fadeIn 1s
+    -webkit-animation: fadeIn 0.3s;
+    animation: fadeIn 0.3s
 }
 
 @-webkit-keyframes fadeIn {
     from {opacity: 0;} 
-    to {opacity: 1;}
+    to {opacity: .7;}
 }
 
 @keyframes fadeIn {
     from {opacity: 0;}
-    to {opacity:1 ;}
+    to {opacity:.7 ;}
 }
