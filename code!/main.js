@@ -37,7 +37,7 @@ var gameBoard = document.getElementById('game-board'), cards = [];
 function makeCards(num) {		
 	for (var i = 0; i < cardInput; i++){
 		var cardElement = document.createElement('div');
-		cardElement.className ='card'; 
+		cardElement.className = 'card'; 
 		gameBoard.appendChild(cardElement);
 		cards.push(cardElement); 
 	}
@@ -99,11 +99,17 @@ function flipOver() {
 	}
 }
 
+function toggleMatchButton() {
+	var popup = document.getElementById('myPopup');
+		popup.classList.toggle('show');
+}
+
 function isMatch(){
 	if (cardsInPlay[0] === cardsInPlay[1]) {
 		var popup = document.getElementById('myPopup');
-		popup.classList.toggle('show');
 		cardsInPlay = [];
+		toggleMatchButton();
+		setTimeout(toggleMatchButton,800);
 	}	
 	else {
 		window.setTimeout(flipBackOver, 2000);
@@ -130,19 +136,28 @@ function showCards(arr) {
 			cards[i].innerHTML = '<img src="images/King.jpg">';
 		}
 	}
-	window.setTimeout(flipBackOver, 2000);
+	setTimeout(flipBackOver, 2000);
 }	
 
-function flipBackOver(){
+function flipBackOver() {
 	var playingCards = document.getElementsByClassName('card');
-	
-	for(i = 0; i < playingCards.length; i++){
+	for (i = 0; i < playingCards.length; i++) {
 		playingCards[i].innerHTML = "";
-
 	}
 }
 
+var scoreHolder = document.createElement('div');
+var scoreText = document.createElement('div');
+var scoreNumber = document.createElement('div');
 
+function scoreCounter() {
+	startContainer.appendChild(scoreHolder);
+	scoreHolder.appendChild(scoreText);
+	scoreHolder.appendChild(scoreNumber);  
+	scoreHolder.className = 'scoreholder';
+}
+
+scoreCounter();
 
 
 

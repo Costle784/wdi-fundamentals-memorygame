@@ -32,9 +32,9 @@ h2 {
 	border: black solid 3px;
 	border-radius: 10px;
 	background: radial-gradient(#e6a71b, black, #9d2525);
-	display: inline-block;
 	float: left;
 	margin: 15px;
+
 }
 article {
 	text-align:center;
@@ -73,7 +73,7 @@ h3 {
 	font-family: 'Cinzel Decorative', cursive;
 }
 
-.popup .popuptext {
+ .popuptext {
 	background-color: rgba(89, 290, 0, 0.65);
 	top:450px;
 	position:absolute;
@@ -92,9 +92,11 @@ h3 {
 	font-weight:800;
 }
 .start {
+	
+	
+	clear:both;
 	text-align:center;
-	margin:15px;
-	font-size:50px;
+	background-color:grey;
 }    
 button {
 	color:red;
@@ -102,12 +104,14 @@ button {
 	font-size:30px;
 	border-radius:7px;
 	font-weight:800;
+	float:right;
+
 }
   
-.popup .show {
+.show {
     visibility: visible;
-    -webkit-animation: fadeIn 0.3s;
-    animation: fadeIn 0.3s
+    -webkit-animation: fadeIn 0.2s;
+    animation: fadeIn 0.2s
 }
 
 @-webkit-keyframes fadeIn {
@@ -118,4 +122,11 @@ button {
 @keyframes fadeIn {
     from {opacity: 0;}
     to {opacity:.7 ;}
+}
+
+.scoreholder {
+	background-color: red;
+	width: 200px;
+	height: 46px;
+	float:right;
 }
