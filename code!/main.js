@@ -14,7 +14,7 @@ function getValue() {
 			cardInput = 24;
 			break;
 		case '4':
-			cardInput = 18;
+			cardInput = 16;
 			break;	
 		case '3':
 			cardInput = 12;
@@ -183,7 +183,7 @@ function isMatch() {
 		setTimeout(toggleMatchButton,2000);
 		setTimeout(function() {
 			cardsInPlay = [];
-		},3000);	
+		},2000);	
 		scoreMinusTen();
 		}	
 }
@@ -192,7 +192,7 @@ function checkPerfect() {
 	if (card1 === card2 && cards.length === 12 && scoreNumber.textContent === '50' ||  
 		card1 === card2 && cards.length === 4 && scoreNumber.textContent === '10' ||
 		card1 === card2 && cards.length === 8 && scoreNumber.textContent === '30' ||
-		card1 === card2 && cards.length === 18 && scoreNumber.textContent === '80' ||
+		card1 === card2 && cards.length === 16 && scoreNumber.textContent === '70' ||
 		card1 === card2 && cards.length === 24 && scoreNumber.textContent === '130') {
 			return true;
 	}

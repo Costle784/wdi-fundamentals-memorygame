@@ -32,8 +32,8 @@ h2 {
 	border: black solid 3px;
 	border-radius: 10px;
 	background: radial-gradient(#e6a71b, black, #9d2525);
-	float: left;
 	margin: 15px;
+	display:inline-block;
 
 }
 article {
