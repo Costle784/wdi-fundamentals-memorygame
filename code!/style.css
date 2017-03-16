@@ -73,9 +73,9 @@ h3 {
 	font-family: 'Cinzel Decorative', cursive;
 }
 
- .popuptext {
+ .matchbutton {
 	background-color: rgba(89, 290, 0, 0.65);
-	top:450px;
+	top:350px;
 	position:absolute;
 	z-index: 1;
 	margin:0 auto;
@@ -91,12 +91,9 @@ h3 {
 	padding:10px;
 	font-weight:800;
 }
-.start {
-	
-	
-	clear:both;
+.startholder {
 	text-align:center;
-	background-color:grey;
+	margin-top:30px;
 }    
 button {
 	color:red;
@@ -104,8 +101,8 @@ button {
 	font-size:30px;
 	border-radius:7px;
 	font-weight:800;
-	float:right;
-
+	width:12%;
+	margin-left:200px;
 }
   
 .show {
@@ -125,8 +122,28 @@ button {
 }
 
 .scoreholder {
-	background-color: red;
 	width: 200px;
 	height: 46px;
 	float:right;
+}
+
+.scoretext {
+	color:blue;
+	width:130px;
+	float:left;
+	font-family: 'Cinzel Decorative', cursive;
+	text-align:right;
+	font-size:30px;
+}
+.scorenum {
+	color:red;
+	width:60px;
+	float:right;
+	font-family: 'Cinzel Decorative', cursive;
+	font-size:30px;
+	text-align:left;
+	padding-left:10px;
+}
+.notamatch {
+	background-color:red;
 }

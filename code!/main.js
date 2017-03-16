@@ -3,7 +3,7 @@ console.log("JS file is connected to HTML! Woo!");
 setTimeout(getValue,400);  
 
 function showPrompt() {
-	return window.prompt("Welcome to Forget Me Not!\nPlease enter a number 1-5\n1 - simple\n2 - easy\n3 - just right\n4 - hard\n5 - INSANE","3")
+	return window.prompt("Kings and Queens!\nPlease enter a number 1-5\n1 - simple\n2 - easy\n3 - just right\n4 - hard\n5 - INSANE","3")
 }	
 
 var cardInput;
@@ -23,31 +23,58 @@ function getValue() {
 			cardInput = 8;
 			break;
 		case '1':
-			cardInput = 6;
+			cardInput = 4;
 			break;
 		default:	
 			cardInput = 12;
 			break;	
 	}		
-	makeCards(cardInput);
+	makeCardsAndBoard(cardInput); // Make board with cards according to user's input
 }
 
 var gameBoard = document.getElementById('game-board'), cards = [];
 
-function makeCards(num) {		
-	for (var i = 0; i < cardInput; i++){
+function makeCardsAndBoard(num) {		
+	for (var i = 0; i < cardInput; i++) {
 		var cardElement = document.createElement('div');
 		cardElement.className = 'card'; 
 		gameBoard.appendChild(cardElement);
 		cards.push(cardElement); 
 	}
+	drawStartButton();
+	drawScoreCounter();
 	makeValueArray(cardInput);
-	createStartButton();
+}
+
+var startButton = document.createElement('button'), startContainer = document.getElementById('startContainer');
+
+function drawStartButton() {
+	startContainer.appendChild(startButton);
+	startButton.innerHTML = 'Start';
+	startButton.addEventListener('click', showCards);
+}
+
+var scoreHolder = document.createElement('div'), scoreText = document.createElement('div'), 
+scoreNumber = document.createElement('div');
+
+function drawScoreCounter() {
+	startContainer.appendChild(scoreHolder);
+	
+	scoreHolder.appendChild(scoreText);
+	scoreHolder.appendChild(scoreNumber);  
+    scoreHolder.className = 'scoreholder';
+	
+	scoreText.className = 'scoretext';
+	scoreText.innerHTML = 'Score:'
+	
+	scoreNumber.className = 'scorenum';
+	scoreNumber.innerHTML = '0';
 }
 
 var valueArray = [];
 
 function makeValueArray(num) {
+	valueArray = [];
 	for (var i = 0; i < num; i++) {
 		if (i % 2) {
 			valueArray.push("queen");
@@ -72,94 +99,143 @@ setAttributes(valueArray);
 
 function setAttributes(arr) {
 	for (var i = 0; i < cards.length; i++) {	
-		// if (!(cards[i].getAttribute('data-card'))) {
-			cards[i].addEventListener('click', flipOver)  // add 'click' event listener to each card and have it trigger flipOver function
-			cards[i].setAttribute('data-card', valueArray[i]); // add 'data-card' attribute and a random 'king' or 'queen' value to 'data-card'
-		// }
+		cards[i].setAttribute('data-card', valueArray[i]); // set 'data-card' to random 'king' or 'queen' value from valueArray
 	}	
 }
 
 var cardsInPlay = []; 
-console.log(cardsInPlay);
+
+function showCards(arr) {
+	
+	for (var i = 0; i < cards.length; i++) {
+		if (cards[i].getAttribute('data-card') === "queen"){
+			cards[i].innerHTML = '<img src="images/Queen.jpg">';
+			cards[i].addEventListener('click', flipOver)
+		}
+		else{
+			cards[i].innerHTML = '<img src="images/King.jpg">';
+			cards[i].addEventListener('click', flipOver)
+		}
+	}
+	setTimeout(function() {
+    	flipBackOver(cards)
+    }, 2000);
+	drawResetButton();
+}	
+
 function flipOver() {
 	if (this.getAttribute('data-card') === "queen") {
 		this.innerHTML = '<img src="images/Queen.jpg">';
-		cardsInPlay.push(this.getAttribute('data-card'));
-		this.setAttribute('data-card', null);
-		(console.log(cardsInPlay))
-	}
+		this.removeEventListener('click', flipOver);
+		cardsInPlay.push(this);
+		console.log(cardsInPlay);
+		}
 	else if (this.getAttribute('data-card') === "king") {
-			this.innerHTML = '<img src="images/King.jpg">';
-			cardsInPlay.push(this.getAttribute('data-card'));
-			this.setAttribute('data-card', null);
-			(console.log(cardsInPlay))
-	}
+		this.innerHTML = '<img src="images/King.jpg">';
+		this.removeEventListener('click', flipOver);
+		cardsInPlay.push(this);
+		console.log(cardsInPlay);
+		}
 	if (cardsInPlay.length === 2) {
 		isMatch();
 	}
 }
 
-function toggleMatchButton() {
-	var popup = document.getElementById('myPopup');
-		popup.classList.toggle('show');
+function flipBackOver(arr) {
+	arr.map(function(element) {
+		element.innerHTML = null;
+	});
 }
 
-function isMatch(){
-	if (cardsInPlay[0] === cardsInPlay[1]) {
-		var popup = document.getElementById('myPopup');
-		cardsInPlay = [];
+var card1;
+var card2;
+
+function isMatch() {
+	card1 = cardsInPlay[0].getAttribute('data-card');
+	card2 = cardsInPlay[1].getAttribute('data-card');
+	console.log(card1,card2);
+
+	if (popup.classList.contains('notamatch')) {
+		popup.classList.remove('notamatch');
+	}
+	if (checkPerfect()) {
+		popup.textContent ='PERFECT!'
 		toggleMatchButton();
-		setTimeout(toggleMatchButton,800);
+		scoreAddTen();
+		setTimeout(toggleMatchButton,3500);
+	}
+	else if (card1 === card2) {
+		cardsInPlay = [];
+		popup.textContent = 'Match!'
+		toggleMatchButton();
+		scoreAddTen();
+		setTimeout(toggleMatchButton,1500);
 	}	
 	else {
-		window.setTimeout(flipBackOver, 2000);
-		cardsInPlay = [];
-	}	
+		setTimeout(function() {
+			flipBackOver(cardsInPlay);
+		},2000);
+		cardsInPlay[0].addEventListener('click',flipOver);	
+		cardsInPlay[1].addEventListener('click',flipOver);	
+		popup.textContent = 'the king is not impressed';
+		popup.classList.toggle('notamatch');
+		toggleMatchButton();
+		setTimeout(toggleMatchButton,2000);
+		setTimeout(function() {
+			cardsInPlay = [];
+		},3000);	
+		scoreMinusTen();
+		}	
 }
 
-function createStartButton() {
-	var startButton = document.createElement('button');
-	var startContainer = document.getElementById('startContainer');
-	startContainer.appendChild(startButton);
-	startButton.innerHTML = 'Start';
-	startButton.addEventListener('click', showCards)
-}
-
-
-function showCards(arr) {
-	for (i = 0; i < cards.length; i++) {
-		
-		if(cards[i].getAttribute('data-card') === "queen"){
-			cards[i].innerHTML = '<img src="images/Queen.jpg">';
-		}
-		else{
-			cards[i].innerHTML = '<img src="images/King.jpg">';
-		}
-	}
-	setTimeout(flipBackOver, 2000);
-}	
-
-function flipBackOver() {
-	var playingCards = document.getElementsByClassName('card');
-	for (i = 0; i < playingCards.length; i++) {
-		playingCards[i].innerHTML = "";
+function checkPerfect() {
+	if (card1 === card2 && cards.length === 12 && scoreNumber.textContent === '50' ||  
+		card1 === card2 && cards.length === 4 && scoreNumber.textContent === '10' ||
+		card1 === card2 && cards.length === 8 && scoreNumber.textContent === '30' ||
+		card1 === card2 && cards.length === 18 && scoreNumber.textContent === '80' ||
+		card1 === card2 && cards.length === 24 && scoreNumber.textContent === '130') {
+			return true;
 	}
 }
 
-var scoreHolder = document.createElement('div');
-var scoreText = document.createElement('div');
-var scoreNumber = document.createElement('div');
-
-function scoreCounter() {
-	startContainer.appendChild(scoreHolder);
-	scoreHolder.appendChild(scoreText);
-	scoreHolder.appendChild(scoreNumber);  
-	scoreHolder.className = 'scoreholder';
+var popup = document.getElementById('myPopup');
+	
+function toggleMatchButton() {
+	popup.classList.toggle('show');
 }
 
-scoreCounter();
+function scoreAddTen() {
+	scoreNumber.innerHTML = Number(scoreNumber.innerHTML) + 10;  
+}
 
+function scoreMinusTen() {
+	scoreNumber.innerHTML = Number(scoreNumber.innerHTML) - 10;
+}
 
+function drawResetButton() {
+	startButton.textContent = "Reset";
+	startButton.addEventListener('click', reset);
+}
+
+function reset() {
+	resetCards();
+	resetStartButton();
+	scoreNumber.innerHTML = 0; // reset score
+	makeValueArray(valueArray.length); // make new shuffled array of values assigned to cards
+}
+
+function resetStartButton() {
+	startButton.textContent = "Start";
+	startButton.removeEventListener('click', reset);
+	startButton.addEventListener('click', showCards);
+}
+
+function resetCards() {
+	cards.forEach(function(card) {
+		card.removeEventListener('click', flipOver);
+		card.innerHTML = null;
+	});
+}
 
 
 
